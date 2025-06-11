@@ -760,7 +760,7 @@ document.addEventListener("DOMContentLoaded", () => {
   {
     id: 122,
     name: '綜合甜甜圈6入',
-    price: 260+"起",
+    price: 260,
     image: 'image/gift02.png',
     images: ['image/gift02.png'],
     description: '這是綜合甜甜圈6入的詳細介紹。',
@@ -814,7 +814,7 @@ document.addEventListener("DOMContentLoaded", () => {
   {
     id: 124,
     name: '綜合甜甜圈12入',
-    price: 460+"起",
+    price: 460,
     image: 'image/gift04.png',
     images: ['image/gift04.png'],
     description: '這是綜合甜甜圈6入的詳細介紹。',
