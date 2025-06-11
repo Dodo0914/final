@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>我的最愛</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:ital,wght@0,300..800;1,300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="./image/logoweb.png">
+  <link rel="shortcut icon" href="./image/logoweb.png">
+  <style>
+   /* Header */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+header {
+  background-color: #D08C60;
+}
+
+.header-top {
+  position: relative;
+  height: 150px;
+  padding:0px 20px;
+}
+  
+.logo-link {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  z-index: 1;
+}
+
+.logo-link:focus,
+.logo-link:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo img {
+  height: 150px;
+  object-fit: contain;
+}
+
+
+/* 店名主標、副標 */
+.brand-name {
+  font-family: "標楷體";
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  line-height: 1.2;
+}
+
+.main-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgba(90, 62, 62, 0.719);
+  margin: 0;
+}
+
+.sub-title {
+  font-size: 16px;
+  color: rgba(105, 83, 83, 0.7);
+  margin: 0;
+}
+
+
+.icons {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.icon {
+  height: 40px;
+}
+
+.search-box {
+  display: none;
+  padding: 5px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+/* 導覽列 */
+.nav-links {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  background-color: #F1DCA7;
+  padding: 15px 0;
+  margin: 0;
+}
+
+.nav-links > li {
+  position: relative;
+  margin: 0 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #333;
+  padding: 10px 15px;
+  display: block;
+}
+
+/* hover 效果：所有項目統一 */
+.nav-links > li > a:hover {
+  background-color: #fff8e1;
+  color: #000;
+  border-radius: 5px;
+}
+
+/* 下拉選單預設隱藏 */
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #F1DCA7;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.submenu {
+  white-space: nowrap;
+  list-style-position: outside; 
+  padding-left: 1.5em;        
+}
+
+.submenu li {
+  white-space: nowrap;
+}
+
+.submenu a {
+  padding: 10px 20px;
+  color: #333;
+}
+
+.submenu a:hover {
+  background-color: #fff8e1;
+  color: #000;
+  border-radius: 5px;
+}
+
+/* 滑鼠懸停時顯示下拉 */
+.dropdown:hover .submenu {
+  display: block;
+}
+
+/* 預設為 dropdown 加上箭頭 */
+.dropdown > a::after {
+  content: " ▼";
+  font-size: 0.6em;
+}
+
+/* 聯絡我們不顯示箭頭 */
+.nav-links > li > a[href="communication.html"]::after {
+  content: none;
+}
+  
+body {
+    font-family: "LXGW WenKai TC", cursive;
+    background-color: #fff8e1;
+    min-height: 100vh;
+}
+
+h1 {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #3d2e00;
+}
+
+.favorite-item {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  background: #fffef6;
+  border: 1px solid #e3c995;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+}
+.favorite-item:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+.favorite-item img {
+  width: 120px;
+  height: auto;
+  border-radius: 10px;
+  margin-right: 20px;
+  object-fit: cover;
+  border: 1px solid #e3c995;
+}
+
+.favorite-item h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #3d2e00;
+}
+
+.favorite-item p {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  color: #6e4e00;
+}
+
+.favorite-item button {
+  margin-left: auto;
+  background-color: #fff3f3;
+  color: #a22;
+  border: 1px solid #ffa6a6;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.favorite-item button:hover {
+  background-color: #ffeaea;
+  transform: scale(1.05);
+}
+
+.btn-clear {
+  margin-top: 10px;
+  padding: 10px 18px;
+  background-color: #d35d00;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-clear:hover {
+  background-color: #b44d00;
+}
+
+#empty-msg {
+  font-size: 1.1rem;
+  color: #7c5e24;
+  margin-top: 30px;
+}
+
+ /* Footer */
+.site-footer {
+  background-color: #B59E8A;
+  padding: 30px 20px;
+  color: #333;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-section h3 a {
+  font-size: 18px;
+  color: #222;
+  text-decoration: none;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 5px;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: #555;
+  text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.content-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header -->
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+       <img src="image/logo.png" alt="Logo">
+        <div class="brand-name">
+          <p class="main-title">咬一圈</p>
+          <p class="sub-title">貝果甜甜圈專賣店</p>
+        </div>
+      </div>
+     </a>
+
+  <div class="icons">
+    <a href="member.html">
+      <img src="image/member.png" alt="會員" class="icon" />
+    </a>
+    <a href="cart.html">
+      <img src="image/cart.png" alt="購物車" class="icon" />
+    </a>
+    <a href="#" id="search-icon">
+      <img src="image/search.png" alt="搜尋" class="icon" />
+    </a>
+    <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+  </div>
+</div>
+
+
+
+  <!-- 導覽列 -->
+<nav>
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#">會員資訊</a>
+      <ul class="submenu">
+        <li><a href="login.html">會員登入/註冊</a></li>
+        <li><a href="member.html">會員中心</a></li>
+        <li><a href="favorite.html">我的最愛</a></li>
+      </ul>
+    </li>
+    <li><a href="communication.html">聯絡我們</a></li>
+
+    <li class="dropdown">
+      <a href="#">關於</a>
+      <ul class="submenu">
+        <li><a href="about_us.html">關於我們</a></li>
+        <li><a href="team.html">創辦人</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">常見問題</a>
+      <ul class="submenu">
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">商品列表</a>
+      <ul class="submenu">
+        <li><a href="products.html?category=all">全部商品</a></li>
+        <li><a href="products.html?category=bagel">貝果</a></li>
+        <li><a href="products.html?category=donut">甜甜圈</a></li>
+        <li><a href="products.html?category=gift">禮盒</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</header>
+
+    <div class="content-container">
+    <h1>💖 我的最愛</h1>
+    <button class="btn-clear" onclick="clearFavorites()">🧹 清空所有收藏</button>
+    <div id="favorites-container"></div>
+    <p id="empty-msg" style="display:none; margin-top:20px;">🫤 尚未收藏任何商品。</p>
+  </div>
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <!-- 區塊 1：關於我們 -->
+    <div class="footer-section">
+      <h3>關於我們</h3>
+      <ul>
+        <li><a href="privacy_page.html">隱私權政策</a></li>
+        <li><a href="return_policy.html">退換貨政策</a></li>
+        <li><a href="locations.html">工作室據點</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 2：會員服務 -->
+    <div class="footer-section">
+      <h3>會員服務</h3>
+      <ul>
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存&加熱方式</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 3：聯絡方式 -->
+    <div class="footer-section">
+      <h3>聯絡方式</h3>
+      <ul>
+        <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+        <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+        <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+        <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 區塊 4：版權聲明 -->
+  <div class="footer-bottom">
+    <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+  </div>
+</footer>
+  <script>
+    const products = [
+      {
+        id: 101,
+        name: "藍莓雪酪減醣貝果",
+        price: 80,
+        image: "image/bagel01.png",
+        category: "貝果"
+      },
+      {
+        id: 102,
+        name: "重乳酪起司減醣貝果",
+        price: 85,
+        image: "image/bagel02.png",
+        category: "貝果"
+      },
+      {
+        id: 103,
+        name: "藍莓優格丁減醣貝果",
+        price: 80,
+        image: "image/bagel03.png",
+        category: "貝果"
+      },
+      {
+        id: 104,
+        name: "東方美人茶花生減醣貝果",
+        price: 75,
+        image: "image/bagel04.png",
+        category: "貝果"
+      },
+      {
+        id: 105,
+        name: "玫瑰洛神乳酪減醣貝果",
+        price: 90,
+        image: "image/bagel05.png",
+        category: "貝果"
+      },
+      {
+        id: 106,
+        name: "奶油香蒜減醣貝果",
+        price: 75,
+        image: "image/bagel06.png",
+        category: "貝果"
+      },
+      {
+        id: 107,
+        name: "抹茶紅豆乳酪減醣貝果",
+        price: 85,
+        image: "image/bagel07.png",
+        category: "貝果"
+      },
+      {
+        id: 108,
+        name: "紫心地瓜減醣貝果",
+        price: 85,
+        image: "image/bagel08.jpg",
+        category: "貝果"
+      },
+      {
+        id: 109,
+        name: "蜜香無花果乳酪減醣貝果",
+        price: 90,
+        image: "image/bagel09.jpg",
+        category: "貝果"
+      },
+      {
+        id: 110,
+        name: "海鹽焦糖乳酪減醣貝果",
+        price: 90,
+        image: "image/bagel10.jpg",
+        category: "貝果"
+      },
+      {
+        id: 111,
+        name: "繽紛草莓甜甜圈",
+        price: 55,
+        image: "image/donut01.png",
+        category: "甜甜圈"
+      },
+      {
+        id: 112,
+        name: "檸檬甜星",
+        price: 60,
+        image: "image/donut02.png",
+        category: "甜甜圈"
+      },
+      {
+        id: 113,
+        name: "杏仁白巧克力甜甜圈",
+        price: 50,
+        image: "image/donut03.png",
+        category: "甜甜圈"
+      },
+      {
+        id: 114,
+        name: "抹茶甜甜圈",
+        price: 45,
+        image: "image/donut04.png",
+        category: "甜甜圈"
+      },
+      {
+        id: 115,
+        name: "百香果派對",
+        price: 60,
+        image: "image/donut05.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 116,
+        name: "可可餅乾甜甜圈",
+        price: 55,
+        image: "image/donut06.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 117,
+        name: "巧克力夾心甜甜圈",
+        price: 50,
+        image: "image/donut07.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 118,
+        name: "花生糖霜甜甜圈",
+        price: 50,
+        image: "image/donut08.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 119,
+        name: "草莓糖霜甜甜圈",
+        price: 50,
+        image: "image/donut09.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 120,
+        name: "葡萄香檳浪花",
+        price: 60,
+        image: "image/donut10.jpg",
+        category: "甜甜圈"
+      },
+      {
+        id: 121,
+        name: "原味糖霜甜甜圈6入",
+        price: 220,
+        image: "image/gift01.png",
+        category: "禮盒"
+      },
+      {
+        id: 122,
+        name: "綜合甜甜圈6入",
+        price: 260+"起",
+        image: "image/gift02.png",
+        category: "禮盒"
+      },
+      {
+        id: 123,
+        name: "原味糖霜甜甜圈12入",
+        price: 400,
+        image: "image/gift03.png",
+        category: "禮盒"
+      },
+      {
+        id: 124,
+        name: "綜合甜甜圈12入",
+        price: 460+"起",
+        image: "image/gift04.png",
+        category: "禮盒"
+      },
+    ];
+    
+    function renderFavorites() {
+    const favIds = JSON.parse(localStorage.getItem("favorites") || "[]").map(String);
+    const container = document.getElementById("favorites-container");
+    const emptyMsg = document.getElementById("empty-msg");
+    container.innerHTML = '';
+
+    if (favIds.length === 0) {
+        emptyMsg.style.display = 'block';
+        return;
+    }
+
+    emptyMsg.style.display = 'none';
+
+    favIds.forEach(id => {
+        const p = products.find(item => item.id === Number(id));
+        if (!p) return;
+
+        const div = document.createElement('div');
+        div.className = 'favorite-item';
+        div.innerHTML = `
+        <a href="product.html?id=${p.id}" style="display: flex; align-items: center; text-decoration: none; color: inherit;">
+            <img src="${p.image}" alt="${p.name}">
+            <div>
+            <h3>${p.name}</h3>
+            <p>價格：$${p.price}</p>
+            </div>
+        </a>
+        <button onclick="removeFavorite(${p.id})">💔 取消收藏</button>
+        `;
+        container.appendChild(div);
+    });
+    }
+
+    function removeFavorite(id) {
+      let fav = JSON.parse(localStorage.getItem("favorites") || "[]");
+      fav = fav.filter(x => Number(x) !== id);
+      localStorage.setItem("favorites", JSON.stringify(fav));
+      renderFavorites();
+    }
+
+    function clearFavorites() {
+      if (confirm("確定要清空所有收藏嗎？")) {
+        localStorage.removeItem("favorites");
+        renderFavorites();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderFavorites);
+  </script>
+</body>
+</html>

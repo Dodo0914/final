@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>填寫資料 - 咬一圈</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:wght@300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" type="image/png" href="./image/logoweb.png">
+</head>
+<body>
+
+
+      <!-- Header -->
+    <header>
+    <div class="header-top">
+        <a href="index.html" class="logo-link">
+        <div class="logo">
+        <img src="./image/logo.png" alt="Logo">
+            <div class="brand-name">
+            <p class="main-title">咬一圈</p>
+            <p class="sub-title">貝果甜甜圈專賣店</p>
+            </div>
+        </div>
+        </a>
+
+        <div class="icons">
+            <a href="member.html">
+            <img src="image/member.png" alt="會員" class="icon" />
+            </a>
+            <a href="cart.html">
+            <img src="image/cart.png" alt="購物車" class="icon" />
+            </a>
+            <a href="#" id="search-icon">
+            <img src="image/search.png" alt="搜尋" class="icon" />
+            </a>
+            <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+        </div>
+    </div>
+
+
+
+    <!-- 導覽列 -->
+    <nav>
+    <ul class="nav-links">
+        <li class="dropdown">
+        <a href="#">會員資訊</a>
+        <ul class="submenu">
+            <li><a href="login.html">會員登入/註冊</a></li>
+            <li><a href="member.html">會員中心</a></li>
+            <li><a href="favorite.html">我的最愛</a></li>
+        </ul>
+        </li>
+        <li><a href="communication.html">聯絡我們</a></li>
+
+        <li class="dropdown">
+        <a href="#">關於</a>
+        <ul class="submenu">
+            <li><a href="about_us.html">關於我們</a></li>
+            <li><a href="team.html">創辦人</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">常見問題</a>
+        <ul class="submenu">
+            <li><a href="shopping_guide.html">購物須知</a></li>
+            <li><a href="order_qa.html">訂單 Q&A</a></li>
+            <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">商品列表</a>
+        <ul class="submenu">
+            <li><a href="products.html?category=all">全部商品</a></li>
+            <li><a href="products.html?category=bagel">貝果</a></li>
+            <li><a href="products.html?category=donut">甜甜圈</a></li>
+            <li><a href="products.html?category=gift">禮盒</a></li>
+        </ul>
+        </li>
+    </ul>
+    </nav>
+    </header>
+
+
+
+<!-- 導覽列 + 步驟條 -->
+<div class="cart-top-bar d-flex justify-content-between align-items-center px-4 pt-4">
+  <div class="breadcrumb-wrapper">
+    <a href="index.html" class="breadcrumb-link">首頁</a>
+    <span class="breadcrumb-separator">→</span>
+    <a href="products.html" class="breadcrumb-link">商品頁</a>
+    <span class="breadcrumb-separator">→</span>
+    <a href="cart.html" class="breadcrumb-link">我的購物車</a>
+    <span class="breadcrumb-separator">→</span>
+    <span class="breadcrumb-current">填寫資料</span>
+  </div>
+  <div class="step-tracker-wrapper">
+    <div class="step-tracker d-flex align-items-center">
+      <div class="step" data-step="1"><div class="circle">1</div><div class="label">我的購物車</div></div>
+      <div class="line"></div>
+      <div class="step active" data-step="2"><div class="circle">2</div><div class="label">填寫資料</div></div>
+      <div class="line"></div>
+      <div class="step" data-step="3"><div class="circle">3</div><div class="label">付款</div></div>
+      <div class="line"></div>
+      <div class="step" data-step="4"><div class="circle">4</div><div class="label">訂單成立</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 填寫資料表單與訂單摘要 -->
+<div class="container fillinfo-container py-5">
+  <div class="row" >
+    <!-- 表單區塊 -->
+    <div class="col-md-7">
+      <h2 class="mb-4">填寫訂單資料</h2>
+      <form id="info-form">
+        <!-- 收件人資訊 -->
+        <div class="mb-4">
+          <h5>收件人資訊</h5>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label for="fullname" class="form-label">姓名</label>
+              <input type="text" class="form-control" id="fullname" name="fullname" required>
+            </div>
+            <div class="col-md-6">
+              <label for="phone" class="form-label">電話</label>
+              <input type="tel" class="form-control" id="phone" name="phone" required>
+            </div>
+            <div class="col-12">
+              <label for="email" class="form-label">電子郵件</label>
+              <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="col-12">
+              <label for="address" class="form-label">地址</label>
+              <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- 配送方式 -->
+        <div class="mb-4">
+          <h5>配送方式(運費皆為$225)</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" id="home" value="冷藏宅配" checked>
+            <label class="form-check-label" for="home">冷藏宅配(黑貓)</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="delivery" id="store" value="冷凍宅配">
+            <label class="form-check-label" for="store">冷凍宅配(黑貓)</label>
+          </div>
+        </div>
+
+        <!-- 備註 -->
+        <div class="mb-4">
+          <label for="note" class="form-label">備註（可選）</label>
+          <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+        </div>
+
+        <!-- 按鈕 -->
+        <div class="d-flex justify-content-between">
+          <a href="cart.html" class="btn btn-outline-secondary">返回購物車</a>
+          <a href="payment.html" class="btn btn-primary">下一步：付款</a>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-md-5 order-summary-box">
+      <h4 class="mb-3">訂單摘要</h4>
+      <div id="order-summary">
+        <!-- 購物車項目將由 JavaScript 動態插入 -->
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+
+<!-- JS：步驟條高亮設定、表單資料儲存與載入、訂單摘要顯示 -->
+<!--<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // 步驟條高亮設定
+    const currentStep = 2;
+    document.querySelectorAll('.step').forEach((step, idx) => {
+      if (idx + 1 < currentStep) step.classList.add('completed');
+      else if (idx + 1 === currentStep) step.classList.add('active');
+    });
+
+    // 載入購物車資料並顯示於訂單摘要
+    const cartData = sessionStorage.getItem('cartData');
+    const orderSummaryDiv = document.getElementById('order-summary');
+    const shippingFee = 225;
+
+    // 假設你已經計算完 subtotal 並用這變數儲存
+    let subtotal = 0;
+
+    const savedCart = sessionStorage.getItem('cartData');
+    if (savedCart) {
+      try {
+        const items = JSON.parse(savedCart);
+        items.forEach(item => {
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'd-flex justify-content-between mb-2';
+          itemDiv.innerHTML = `
+            <span>${item.name} × ${item.quantity}</span>
+            <span>$${item.price * item.quantity}</span>
+          `;
+          orderSummaryDiv.appendChild(itemDiv);
+          subtotal += item.price * item.quantity;
+        });
+      } catch (e) {
+        console.error('載入購物車資料失敗', e);
+      }
+    }
+
+    // 插入小計
+    const subtotalDiv = document.createElement('div');
+    subtotalDiv.className = 'summary-subtotal';
+    subtotalDiv.innerHTML = `<strong>小計</strong><strong>$${subtotal}</strong>`;
+    orderSummaryDiv.appendChild(subtotalDiv);
+
+
+    // 插入運費
+    const shippingDiv = document.createElement('div');
+    shippingDiv.className = 'd-flex justify-content-between';
+    shippingDiv.innerHTML = `<strong>運費</strong><strong>$${shippingFee}</strong>`;
+    orderSummaryDiv.appendChild(shippingDiv);
+
+    //插入總計
+    const totalDiv = document.createElement('div');
+    totalDiv.className = 'summary-total';
+    totalDiv.innerHTML = `<strong>總計</strong><strong>$${subtotal + shippingFee}</strong>`;
+    orderSummaryDiv.appendChild(totalDiv);
+
+
+
+
+    // 載入表單資料
+    const form = document.getElementById('info-form');
+    const formElements = form.elements;
+    for (let i = 0; i < formElements.length; i++) {
+      const input = formElements[i];
+      if (input.name && sessionStorage.getItem(input.name)) {
+        if (input.type === 'radio') {
+          if (input.value === sessionStorage.getItem(input.name)) {
+            input.checked = true;
+          }
+        } else {
+          input.value = sessionStorage.getItem(input.name);
+        }
+      }
+    }
+
+    // 即時儲存表單資料
+    form.addEventListener('input', (e) => {
+      const input = e.target;
+      if (input.name) {
+        if (input.type === 'radio') {
+          if (input.checked) {
+            sessionStorage.setItem(input.name, input.value);
+          }
+        } else {
+          sessionStorage.setItem(input.name, input.value);
+        }
+      }
+    });
+
+    // 表單提交處理
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // 表單提交處理（續）
+      const requiredFields = ['fullname', 'phone', 'email', 'address'];
+      let valid = true;
+      requiredFields.forEach(name => {
+        const input = form.elements[name];
+        if (!input.value.trim()) {
+          input.classList.add('is-invalid');
+          valid = false;
+        } else {
+          input.classList.remove('is-invalid');
+        }
+      });
+
+      if (!valid) {
+        alert('請完整填寫必填欄位');
+        return;
+      }
+
+      // 儲存所有欄位資料至 sessionStorage
+      for (let i = 0; i < formElements.length; i++) {
+        const input = formElements[i];
+        if (input.name) {
+          if (input.type === 'radio') {
+            if (input.checked) {
+              sessionStorage.setItem(input.name, input.value);
+            }
+          } else {
+            sessionStorage.setItem(input.name, input.value);
+          }
+        }
+      }
+
+      // 導向付款頁面
+      window.location.href = "payment.html";
+    });
+  });
+</script>
+
+-->
+
+
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <!-- 區塊 1：關於我們 -->
+    <div class="footer-section">
+      <h3>關於我們</h3>
+      <ul>
+        <li><a href="privacy_page.html">隱私權政策</a></li>
+        <li><a href="return_policy.html">退換貨政策</a></li>
+        <li><a href="locations.html">工作室據點</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 2：會員服務 -->
+    <div class="footer-section">
+      <h3>會員服務</h3>
+      <ul>
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存&加熱方式</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 3：聯絡方式 -->
+    <div class="footer-section">
+      <h3>聯絡方式</h3>
+      <ul>
+        <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+        <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+        <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+        <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 區塊 4：版權聲明 -->
+  <div class="footer-bottom">
+    <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+  </div>
+</footer>
+<script src="assets/scripts2.js"></script>
+</body>
+</html>

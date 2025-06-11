@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>付款</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:wght@300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" type="image/png" href="./image/logoweb.png">
+</head>
+<body>
+
+    
+      <!-- Header -->
+    <header>
+    <div class="header-top">
+        <a href="index.html" class="logo-link">
+        <div class="logo">
+        <img src="./image/logo.png" alt="Logo">
+            <div class="brand-name">
+            <p class="main-title">咬一圈</p>
+            <p class="sub-title">貝果甜甜圈專賣店</p>
+            </div>
+        </div>
+        </a>
+
+        <div class="icons">
+            <a href="member.html">
+            <img src="image/member.png" alt="會員" class="icon" />
+            </a>
+            <a href="cart.html">
+            <img src="image/cart.png" alt="購物車" class="icon" />
+            </a>
+            <a href="#" id="search-icon">
+            <img src="image/search.png" alt="搜尋" class="icon" />
+            </a>
+            <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+        </div>
+    </div>
+
+
+
+    <!-- 導覽列 -->
+    <nav>
+    <ul class="nav-links">
+        <li class="dropdown">
+        <a href="#">會員資訊</a>
+        <ul class="submenu">
+            <li><a href="login.html">會員登入/註冊</a></li>
+            <li><a href="member.html">會員中心</a></li>
+            <li><a href="favorite.html">我的最愛</a></li>
+        </ul>
+        </li>
+        <li><a href="communication.html">聯絡我們</a></li>
+
+        <li class="dropdown">
+        <a href="#">關於</a>
+        <ul class="submenu">
+            <li><a href="about_us.html">關於我們</a></li>
+            <li><a href="team.html">創辦人</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">常見問題</a>
+        <ul class="submenu">
+            <li><a href="shopping_guide.html">購物須知</a></li>
+            <li><a href="order_qa.html">訂單 Q&A</a></li>
+            <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">商品列表</a>
+        <ul class="submenu">
+            <li><a href="products.html?category=all">全部商品</a></li>
+            <li><a href="products.html?category=bagel">貝果</a></li>
+            <li><a href="products.html?category=donut">甜甜圈</a></li>
+            <li><a href="products.html?category=gift">禮盒</a></li>
+        </ul>
+        </li>
+    </ul>
+    </nav>
+    </header>
+
+<!-- 導覽列 + 步驟條 -->
+<div class="cart-top-bar d-flex justify-content-between align-items-center px-4 pt-4">
+    <div class="breadcrumb-wrapper">
+        <a href="index.html" class="breadcrumb-link">首頁</a>
+        <span class="breadcrumb-separator">→</span>
+        <a href="products.html" class="breadcrumb-link">商品頁</a>
+        <span class="breadcrumb-separator">→</span>
+        <a href="cart.html" class="breadcrumb-link">我的購物車</a>
+        <span class="breadcrumb-separator">→</span>
+        <a href="fillinfo.html" class="breadcrumb-link">填寫資料</a>
+        <span class="breadcrumb-separator">→</span>
+        <span class="breadcrumb-current">付款</span>
+    </div>
+
+    <div class="step-tracker-wrapper">
+        <div class="step-tracker d-flex align-items-center">
+            <div class="step" data-step="1">
+                <div class="circle">1</div>
+                <div class="label">我的購物車</div>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-step="2">
+                <div class="circle">2</div>
+                <div class="label">填寫資料</div>
+            </div>
+            <div class="line"></div>
+            <div class="step active" data-step="3">
+                <div class="circle">3</div>
+                <div class="label">付款</div>
+            </div>
+            <div class="line"></div>
+            <div class="step" data-step="4">
+                <div class="circle">4</div>
+                <div class="label">訂單成立</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 付款主體區塊 -->
+<div class="container">
+  <div class="row justify-content-center fullwidth-container">
+    <!-- 付款表單 -->
+    <div class="col-md-7">
+      <h2 class="mb-4">付款資訊</h2>
+      <form id="payment-form">
+        <div class="mb-3">
+          <label for="cardName">持卡人姓名</label>
+          <input type="text" id="cardName" name="cardName" class="form-control" placeholder="example: Chen Xiao-ming"required />
+        </div>
+        <div class="mb-3">
+          <label for="cardNumber">卡號</label>
+          <input type="text" id="cardNumber" name="cardNumber" class="form-control" maxlength="19" placeholder="**** **** **** ****" required />
+        </div>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="expDate">有效期限</label>
+            <input type="text" id="expDate" name="expDate" class="form-control" placeholder="MM/YY" required />
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="cvv">安全碼 (CVV)</label>
+            <input type="text" id="cvv" name="cvv" class="form-control" placeholder="***" maxlength="4" required />
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="btn btn-primary w-100">確認付款</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <!-- 區塊 1：關於我們 -->
+    <div class="footer-section">
+      <h3>關於我們</h3>
+      <ul>
+        <li><a href="privacy-policy.html">隱私政策</a></li>
+        <li><a href="return-policy.html">退換貨政策</a></li>
+        <li><a href="locations.html">市場據點</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 2：會員服務 -->
+    <div class="footer-section">
+      <h3>會員服務</h3>
+      <ul>
+        <li><a href="shopping-guide.html">購物須知</a></li>
+        <li><a href="order-qa.html">訂單 Q&A</a></li>
+        <li><a href="storage-heating.html">商品保存&加熱方式</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 3：聯絡方式 -->
+    <div class="footer-section">
+      <h3>聯絡方式</h3>
+      <ul>
+        <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+        <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+        <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+        <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 區塊 4：版權聲明 -->
+  <div class="footer-bottom">
+    <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+  </div>
+</footer>
+
+<script src="assets/scripts2.js"></script>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:wght@300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    <link rel="icon" type="image/png" href="./image/logoweb.png">
+</head>
+<body>
+
+      <!-- Header -->
+    <header>
+    <div class="header-top">
+        <a href="index.html" class="logo-link">
+        <div class="logo">
+        <img src="./image/logo.png" alt="Logo">
+            <div class="brand-name">
+            <p class="main-title">咬一圈</p>
+            <p class="sub-title">貝果甜甜圈專賣店</p>
+            </div>
+        </div>
+        </a>
+
+        <div class="icons">
+            <a href="member.html">
+            <img src="image/member.png" alt="會員" class="icon" />
+            </a>
+            <a href="cart.html">
+            <img src="image/cart.png" alt="購物車" class="icon" />
+            </a>
+            <a href="#" id="search-icon">
+            <img src="image/search.png" alt="搜尋" class="icon" />
+            </a>
+            <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+        </div>
+    </div>
+
+
+
+    <!-- 導覽列 -->
+    <nav>
+    <ul class="nav-links">
+        <li class="dropdown">
+        <a href="#">會員資訊</a>
+        <ul class="submenu">
+            <li><a href="login.html">會員登入/註冊</a></li>
+            <li><a href="member.html">會員中心</a></li>
+            <li><a href="favorite.html">我的最愛</a></li>
+        </ul>
+        </li>
+        <li><a href="communication.html">聯絡我們</a></li>
+
+        <li class="dropdown">
+        <a href="#">關於</a>
+        <ul class="submenu">
+            <li><a href="about_us.html">關於我們</a></li>
+            <li><a href="team.html">創辦人</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">常見問題</a>
+        <ul class="submenu">
+            <li><a href="shopping_guide.html">購物須知</a></li>
+            <li><a href="order_qa.html">訂單 Q&A</a></li>
+            <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+        </ul>
+        </li>
+        <li class="dropdown">
+        <a href="#">商品列表</a>
+        <ul class="submenu">
+            <li><a href="products.html?category=all">全部商品</a></li>
+            <li><a href="products.html?category=bagel">貝果</a></li>
+            <li><a href="products.html?category=donut">甜甜圈</a></li>
+            <li><a href="products.html?category=gift">禮盒</a></li>
+        </ul>
+        </li>
+    </ul>
+    </nav>
+    </header>
+
+    <div class="main-content">
+        <div class="container">
+        <div>
+            <h1><i class="fas fa-user-circle"></i> 會員中心</h1>
+            <p>管理您的個人資料與消費記錄</p>
+        </div>
+        <div class="wrapper">
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showSection('profile')">
+                    <i class="fas fa-user"></i> 個人資料
+                </button>
+                <button class="nav-btn" onclick="showSection('history')">
+                    <i class="fas fa-shopping-cart"></i> 歷史消費紀錄
+                </button>
+                <button class="nav-btn" onclick="showSection('reviews')">
+                    <i class="fas fa-comments"></i> 評論紀錄
+                </button>
+            </div>
+
+            <!-- 個人資料區域 -->
+            <div id="profile" class="content-section active">
+
+                <br>
+                <h2><i class="fas fa-edit"></i> 個人資料</h2>
+                <form id="profileForm" class="member-profile-form">
+
+                    <div class="input-group">
+                        <label for="profileName">姓名</label>
+                        <div class="input-inner">
+                        <input type="text" id="profileName" name="name" value="Customer" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profileEmail">電子信箱</label>
+                        <div class="input-inner">
+                        <input type="email" id="profileEmail" name="email" value="test@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profilePhone">手機號碼</label>
+                        <div class="input-inner">
+                        <input type="tel" id="profilePhone" name="phone" value="0912-345-678" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profileBirthday">生日</label>
+                        <div class="input-inner">
+                        <input type="date" id="profileBirthday" name="birthday" value="">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profileGender">性別</label>
+                        <div class="input-inner">
+                            <select id="profileGender" name="gender" 
+                                style="width: 40%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 16px; background-color: #fff; color: #333; appearance: none; -webkit-appearance: none; -moz-appearance: none;">
+                                <option value="">請選擇</option>
+                                <option value="male">男性</option>
+                                <option value="female">女性</option>
+                                <option value="other">其他</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="profileAddress">地址</label>
+                        <div class="input-inner">
+                        <input type="text" id="profileAddress" name="address" placeholder="請輸入地址（選填）">
+                        </div>
+                    </div>
+
+                    
+
+                    <div class="btn-wrapper">
+                        <button class="nav-btn active" onclick="showSection('profile')"> 
+                            保存更改
+                        </button>
+                    </div>
+                </form>
+
+
+            </div>
+
+            <!-- 歷史消費紀錄區域 -->
+            <div id="history" class="content-section">
+                <br>
+                <h2><i class="fas fa-history"></i> 歷史消費紀錄</h2>
+                <div id="purchaseHistory">
+                    <div class="purchase-item">
+                        <div class="purchase-date">2024-12-15</div>
+                        <div class="purchase-details">
+                            <h4>訂單編號：ORD-2024-001</h4>
+                            <p>商品：藍莓貝果 x3、巧克力甜甜圈 x2</p>
+                            <div class="purchase-amount">總金額：NT$ 380</div>
+                        </div>
+                    </div>
+
+                    <div class="purchase-item">
+                        <div class="purchase-date">2024-11-28</div>
+                        <div class="purchase-details">
+                            <h4>訂單編號：ORD-2024-002</h4>
+                            <p>商品：芝麻貝果 x2、草莓甜甜圈 x1</p>
+                            <div class="purchase-amount">總金額：NT$ 260</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 評論紀錄區域 -->
+            <div id="reviews" class="content-section">
+                <br>
+                <h2><i class="fas fa-star"></i> 評論紀錄</h2>
+                <div id="reviewHistory">
+                    <div class="review-item">
+                        <div class="review-details" style="border: 2px solid #b59e8a; border-radius: 12px; padding: 16px; margin:7px ;">
+                        <div class="review-date">2024-12-16</div>
+                        
+                            <h4>藍莓貝果</h4>
+                            <div class="rating">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star-o star"></i>
+                                <span class="rating-value">你打的分數是 4</span>
+                            </div>
+                            <div class="review-text">
+                                藍莓很新鮮，貝果的口感很有嚼勁！早餐的好選擇，會再購買。
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-details" style="border: 2px solid #b59e8a; border-radius: 12px; padding: 16px;  margin:7px ;">
+                        <div class="review-date">2024-11-29</div>    
+                            <h4>巧克力甜甜圈</h4>
+                            <div class="rating">
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <i class="fas fa-star star"></i>
+                                <span class="rating-value">你打的分數是 5</span>
+                            </div>
+                            <div class="review-text">
+                                巧克力醬很濃郁，甜甜圈鬆軟香甜，完美的下午茶點心！
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <!-- 區塊 1：關於我們 -->
+            <div class="footer-section">
+            <h3>關於我們</h3>
+            <ul>
+                <li><a href="privacy-policy.html">隱私政策</a></li>
+                <li><a href="return-policy.html">退換貨政策</a></li>
+                <li><a href="locations.html">市場據點</a></li>
+            </ul>
+            </div>
+
+            <!-- 區塊 2：會員服務 -->
+            <div class="footer-section">
+            <h3>會員服務</h3>
+            <ul>
+                <li><a href="shopping-guide.html">購物須知</a></li>
+                <li><a href="order-qa.html">訂單 Q&A</a></li>
+                <li><a href="storage-heating.html">商品保存&加熱方式</a></li>
+            </ul>
+            </div>
+
+            <!-- 區塊 3：聯絡方式 -->
+            <div class="footer-section">
+            <h3>聯絡方式</h3>
+            <ul>
+                <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+                <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+                <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+                <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+            </ul>
+            </div>
+        </div>
+
+        <!-- 區塊 4：版權聲明 -->
+        <div class="footer-bottom">
+            <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+        </div>
+    </footer>
+    <script src="assets/scripts2.js"></script>
+</body>
+</html>

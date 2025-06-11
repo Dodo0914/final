@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:ital,wght@0,300..800;1,300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style2.css">
+    <link rel="icon" type="image/png" href="./image/logoweb.png">
+  <link rel="shortcut icon" href="./image/logoweb.png">
+</head>
+<body>
+      <!-- Header -->
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+       <img src="image/logo.png" alt="Logo">
+        <div class="brand-name">
+          <p class="main-title">咬一圈</p>
+          <p class="sub-title">貝果甜甜圈專賣店</p>
+        </div>
+      </div>
+     </a>
+
+  <div class="icons">
+    <a href="member.html">
+      <img src="image/member.png" alt="會員" class="icon" />
+    </a>
+    <a href="cart.html">
+      <img src="image/cart.png" alt="購物車" class="icon" />
+    </a>
+    <a href="#" id="search-icon">
+      <img src="image/search.png" alt="搜尋" class="icon" />
+    </a>
+    <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+  </div>
+</div>
+
+
+
+  <!-- 導覽列 -->
+<nav>
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#">會員資訊</a>
+      <ul class="submenu">
+        <li><a href="login.html">會員登入/註冊</a></li>
+        <li><a href="member.html">會員中心</a></li>
+        <li><a href="favorite.html">我的最愛</a></li>
+      </ul>
+    </li>
+    <li><a href="communication.html">聯絡我們</a></li>
+
+    <li class="dropdown">
+      <a href="#">關於</a>
+      <ul class="submenu">
+        <li><a href="about_us.html">關於我們</a></li>
+        <li><a href="team.html">創辦人</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">常見問題</a>
+      <ul class="submenu">
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">商品列表</a>
+      <ul class="submenu">
+        <li><a href="products.html?category=all">全部商品</a></li>
+        <li><a href="products.html?category=bagel">貝果</a></li>
+        <li><a href="products.html?category=donut">甜甜圈</a></li>
+        <li><a href="products.html?category=gift">禮盒</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</header>
+
+    <div class="content-container">
+      <div class="product-container">
+          <div class="product-main">
+          <div class="product-img">
+            <button class="favorite-btn" aria-label="加入收藏" ></button>
+            <div class="main-image-scroll" id="mainImageScroll"></div>
+            <div class="thumbnail-scroll">
+              <div class="thumbnail-list" data-active="0"></div>
+            </div>
+          </div>
+              <div class="product-info">
+                <h1 class="product-title">藍莓雪酪貝果</h1>
+                <div class="price">價格：$100 / 份</div>
+                <div class="product-description"></div>
+                <div class="rating">
+                  評價：<span class="top-stars">★★★★★</span>
+                  <span class="top-score">0.0</span>
+                  (<span class="top-count">0</span> 評價)
+                </div>
+                <div class="quantity-wrapper">
+                  <label for="quantity">數量:</label>
+                  <div class="quantity-control">
+                      <button class="decrease">–</button>
+                      <input type="text" id="quantity" value="1" readonly>
+                      <button class="increase">+</button>
+                  </div>
+                </div>
+                <div class="product-actions">
+                  <button class="btn-orange">加入購物車</button>
+                  <button class="btn-orange">直接購買</button>
+                </div>
+              </div>
+          </div>
+ <div class="product-tabs">
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="intro">產品簡介</button>
+    <button class="tab-btn" data-tab="nutrition">產品營養成分</button>
+    <button class="tab-btn" data-tab="reviews">評價</button>
+  </div>
+  <div class="tab-contents">
+    <div class="tab-content active" id="intro"></div>
+    <div class="tab-content" id="nutrition">
+      <table class="nutrition-table">
+        <thead>
+          <tr><th colspan="2">營養標示（每份）</th></tr>
+          <tr><th>項目</th><th>數值</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="tab-content" id="reviews">
+      <!-- 評價區原樣放進來 -->
+      <div class="reviews-section">
+        <h3><span class="review-count">0</span> 個評價</h3>
+        <div class="rating-summary">
+          <div class="average-score">
+            <span class="stars average-stars">★★★★★</span>
+            <span class="score average-score-text">0.0分</span>
+          </div>
+          <div class="breakdown">
+            <div class="bar"><span>5分</span><div class="bar-fill bar-5" style="width: 0%;"></div><span class="percent-5">0%</span></div>
+            <div class="bar"><span>4分</span><div class="bar-fill bar-4" style="width: 0%;"></div><span class="percent-4">0%</span></div>
+            <div class="bar"><span>3分</span><div class="bar-fill bar-3" style="width: 0%;"></div><span class="percent-3">0%</span></div>
+            <div class="bar"><span>2分</span><div class="bar-fill bar-2" style="width: 0%;"></div><span class="percent-2">0%</span></div>
+            <div class="bar"><span>1分</span><div class="bar-fill bar-1" style="width: 0%;"></div><span class="percent-1">0%</span></div>
+          </div>
+        </div>
+        <div class="review-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <h2 class="section-title">最常搭配購買的商品</h2>
+      <div class="recommend-wrapper">
+        <button class="scroll-btn left" aria-label="上一頁">‹</button>
+        <div class="recommend-scroll" id="recommend-scroll"></div>
+        <button class="scroll-btn right" aria-label="下一頁">›</button>
+      </div>
+    </div>
+    </div>
+
+      <!-- Footer -->
+    <footer class="site-footer">
+      <div class="footer-container">
+
+    <!-- 區塊 1：關於我們 -->
+      <div class="footer-section">
+      <h3>關於我們</h3>
+      <ul>
+        <li><a href="privacy_page.html">隱私權政策</a></li>
+        <li><a href="return_policy.html">退換貨政策</a></li>
+        <li><a href="locations.html">工作室據點</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 2：會員服務 -->
+    <div class="footer-section">
+      <h3>會員服務</h3>
+      <ul>
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存&加熱方式</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 3：聯絡方式 -->
+    <div class="footer-section">
+      <h3>聯絡方式</h3>
+      <ul>
+        <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+        <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+        <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+        <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 區塊 4：版權聲明 -->
+  <div class="footer-bottom">
+    <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+  </div>
+</footer>
+
+</body>
+
+<script src="assets/script3.js"></script>
+</html>

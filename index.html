@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>咬一圈官方網站</title>
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bytesized&family=Faustina:ital,wght@0,300..800;1,300..800&family=LXGW+WenKai+TC&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/decorate.css">
+  <link rel="icon" type="image/png" href="./image/logoweb.png">
+  <link rel="shortcut icon" href="./image/logoweb.png">
+</head>
+<body>
+
+  <!-- Header -->
+<header>
+  <div class="header-top">
+    <a href="index.html" class="logo-link">
+      <div class="logo">
+       <img src="image/logo.png" alt="Logo">
+        <div class="brand-name">
+          <p class="main-title">咬一圈</p>
+          <p class="sub-title">貝果甜甜圈專賣店</p>
+        </div>
+      </div>
+     </a>
+
+  <div class="icons">
+    <a href="member.html">
+      <img src="image/member.png" alt="會員" class="icon" />
+    </a>
+    <a href="cart.html">
+      <img src="image/cart.png" alt="購物車" class="icon" />
+    </a>
+    <a href="#" id="search-icon">
+      <img src="image/search.png" alt="搜尋" class="icon" />
+    </a>
+    <input type="text" id="search-input" placeholder="搜尋..." class="search-box" style="display:none;" />
+  </div>
+</div>
+
+
+
+  <!-- 導覽列 -->
+<nav>
+  <ul class="nav-links">
+    <li class="dropdown">
+      <a href="#">會員資訊</a>
+      <ul class="submenu">
+        <li><a href="login.html">會員登入/註冊</a></li>
+        <li><a href="member.html">會員中心</a></li>
+        <li><a href="favorite.html">我的最愛</a></li>
+      </ul>
+    </li>
+    <li><a href="communication.html">聯絡我們</a></li>
+
+    <li class="dropdown">
+      <a href="#">關於</a>
+      <ul class="submenu">
+        <li><a href="about_us.html">關於我們</a></li>
+        <li><a href="team.html">創辦人</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">常見問題</a>
+      <ul class="submenu">
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存與加熱方式</a></li>
+      </ul>
+    </li>
+    <li class="dropdown">
+      <a href="#">商品列表</a>
+      <ul class="submenu">
+        <li><a href="products.html?category=all">全部商品</a></li>
+        <li><a href="products.html?category=bagel">貝果</a></li>
+        <li><a href="products.html?category=donut">甜甜圈</a></li>
+        <li><a href="products.html?category=gift">禮盒</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</header>
+
+
+<!-- Carousel -->
+<section class="carousel">
+  <button class="arrow left" onclick="plusSlides(-1)">❮</button>
+
+  <div class="carousel-window">
+    <div class="carousel-track" id="carousel-track">
+      <div class="mySlides"><img src="image/big_photo.png" class="carousel-img" /></div>
+      <div class="mySlides"><img src="image/big_photo1.jpg" class="carousel-img" /></div>
+      <div class="mySlides"><img src="image/bagel_process.jpg" class="carousel-img" /></div>
+      <div class="mySlides"><img src="image/big_photo2.jpg" class="carousel-img" /></div>
+    </div>
+
+    <!-- 指示點 -->
+    <div class="carousel-indicators">
+      <span class="dot active" onclick="currentSlides(0)"></span>
+      <span class="dot" onclick="currentSlides(1)"></span>
+      <span class="dot" onclick="currentSlides(2)"></span>
+      <span class="dot" onclick="currentSlides(3)"></span>
+    </div>
+  </div>
+
+  <button class="arrow right" onclick="plusSlides(1)">❯</button>
+</section>
+
+
+
+<!-- 品牌標語 -->
+<section class="brand-tagline">
+  <br><h2>咬一圈，品味健康的每一口</h2>
+  <p>我們用心挑選天然食材，堅持無添加，讓您安心享受每一份貝果與甜甜圈的美味。</p>
+  <h3>為什麼叫「咬一圈」？</h3>
+  <p>因為每一口，都像環繞著幸福與健康，讓甜點不只是甜，更是身心的滿足與安心。</p>
+</section>
+
+  <!-- 食品特色 -->
+<section class="features">
+  <h2><b>食品特色</b></h2><br>
+  <div class="features-list">
+    <div class="feature-item">
+      <img src="image/cereal.jpg" alt="穀物" class="picture"/>
+      <p>天然食材</p>
+    </div>
+    <div class="feature-item">
+      <img src="image/soybean.jpg" alt="大豆" class="picture"/>
+      <p>外酥內Q</p>
+    </div>
+    <div class="feature-item">
+      <img src="image/delivery_fast.jpg" alt="配送快速" class="picture"/>
+      <p>快速方便</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Bagels & Donuts 區塊 -->
+  <section class="products-main">
+    <h2><b>Bagels & Donuts</b></h2>
+    <div class="product-links">
+      <a href="products.html?category=bagel" class="product-box">
+        <img src="image/goods_bagel.jpg" alt="Bagel 照片">
+      </a>
+      <a href="products.html?category=donut" class="product-box">
+        <img src="image/goods_donut.jpg" alt="Donut 照片">
+      </a>
+      <a href="products.html?category=gift" class="product-box">
+        <img src="image/giftboxx1.jpg" alt="禮盒 照片">
+      </a>
+    </div>
+  </section>
+
+
+<!-- 熱銷商品推薦 -->
+<section class="hot-products">
+  <h2><b>推薦 / 熱銷商品</b></h2>
+  <div class="slider-container">
+    <button class="arrow left" onclick="prevProduct()">❮</button>
+
+    <div class="product-slider-wrapper">
+      <div class="product-slider" id="productSlider">
+        <a href="shop.html?id=108" class="product-card">
+          <img src="image/hotgoods1.jpg" alt="1" /><p>紫心地瓜減醣貝果</p>
+        </a>
+        <a href="shop.html?id=118" class="product-card">
+          <img src="image/hotgoods4.jpg" alt="4" /><p>花生糖霜甜甜圈</p>
+        </a>
+        <a href="shop.html?id=103" class="product-card">
+          <img src="image/hotgoods2.jpg" alt="2" /><p>藍莓優格丁減醣貝果</p>
+        </a>
+        <a href="shop.html?id=116" class="product-card">
+          <img src="image/hotgoods5.jpg" alt="5" /><p>可可餅乾甜甜圈</p>
+        </a>
+        <a href="shop.html?id=105" class="product-card">
+          <img src="image/hotgoods3.jpg" alt="3" /><p>玫瑰洛神乳酪減糖貝果</p>
+        </a>
+        <a href="shop.html?id=119" class="product-card">
+          <img src="image/hotgoods6.jpg" alt="6" /><p>草莓糖霜甜甜圈</p>
+        </a>
+      </div>
+    </div>
+
+    <button class="arrow right" onclick="nextProduct()">❯</button>
+  </div>
+</section>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+
+    <!-- 區塊 1：關於我們 -->
+    <div class="footer-section">
+      <h3>關於我們</h3>
+      <ul>
+        <li><a href="privacy_page.html">隱私權政策</a></li>
+        <li><a href="return_policy.html">退換貨政策</a></li>
+        <li><a href="locations.html">工作室據點</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 2：會員服務 -->
+    <div class="footer-section">
+      <h3>會員服務</h3>
+      <ul>
+        <li><a href="shopping_guide.html">購物須知</a></li>
+        <li><a href="order_qa.html">訂單 Q&A</a></li>
+        <li><a href="storage_heating.html">商品保存&加熱方式</a></li>
+      </ul>
+    </div>
+
+    <!-- 區塊 3：聯絡方式 -->
+    <div class="footer-section">
+      <h3>聯絡方式</h3>
+      <ul>
+        <li>客服專線 | <a href="tel:0800-000-123">0800-000-123</a></li>
+        <li>客服信箱 | <a href="yaoyiquan.bagel@gmail.com">yaoyiquan.bagel@gmail.com</a></li>
+        <li>客服 | <a href="https://line.me/R/ti/p/line帳號" target="_blank">咬一圈官方Line</a></li>
+        <li>客服時間 | 週一至週五 10:00 - 18:00</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 區塊 4：版權聲明 -->
+  <div class="footer-bottom">
+    <p> 咬一圈 &copy; 2025 All Right Reserved.</p>
+  </div>
+</footer>
+
+  <script src="assets/scripts2.js"></script>
+</body>
+</html>
