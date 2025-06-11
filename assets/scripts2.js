@@ -442,7 +442,7 @@ function renderCart() {
     <div class="cart-item d-flex justify-content-between align-items-center mb-3">
       <div class="item-details d-flex align-items-center">
         <div class="item-img me-3">
-          <img src="${item.image || ''}" alt="${item.name}" width="80" />
+          <img src="${item.image.startsWith('image/') ? item.image : 'image/' + item.image}" alt="${item.name}" width="80" />
         </div>
         <div class="item-info" data-price="${item.price}">${item.name} - $${item.price}</div>
       </div>
