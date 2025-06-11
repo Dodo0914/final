@@ -159,7 +159,85 @@ if (registerForm) {
         phone: '0912345678',
         password: '123456'
     });
-}
+}// ========================================
+// 登入狀態管理工具
+// ========================================
+
+// 安全的登入狀態儲存
+const AuthManager = {
+    // 設定登入狀態
+    setLoginState: function(user) {
+        try {
+            const loginData = {
+                user: user,
+                timestamp: Date.now(),
+                expires: Date.now() + (24 * 60 * 60 * 1000) // 24小時後過期
+            };
+            localStorage.setItem('loggedInUser', JSON.stringify(user));
+            localStorage.setItem('loginState', JSON.stringify(loginData));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // 設定 session 備份
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            
+            console.log('登入狀態已保存:', user);
+        } catch (error) {
+            console.error('保存登入狀態失敗:', error);
+        }
+    },
+    
+    // 取得登入狀態
+    getLoginState: function() {
+        try {
+            // 優先檢查 localStorage
+            const loginState = localStorage.getItem('loginState');
+            if (loginState) {
+                const parsed = JSON.parse(loginState);
+                
+                // 檢查是否過期
+                if (parsed.expires && Date.now() > parsed.expires) {
+                    this.clearLoginState();
+                    return null;
+                }
+                
+                return parsed.user;
+            }
+            
+            // 備用檢查舊格式
+            const legacyUser = localStorage.getItem('loggedInUser');
+            if (legacyUser) {
+                return JSON.parse(legacyUser);
+            }
+            
+            // 最後檢查 sessionStorage
+            const sessionUser = sessionStorage.getItem('currentUser');
+            if (sessionUser) {
+                return JSON.parse(sessionUser);
+            }
+            
+            return null;
+        } catch (error) {
+            console.error('讀取登入狀態失敗:', error);
+            return null;
+        }
+    },
+    
+    // 檢查是否已登入
+    isLoggedIn: function() {
+        const user = this.getLoginState();
+        const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        return user !== null && isLoggedIn;
+    },
+    
+    // 清除登入狀態
+    clearLoginState: function() {
+        localStorage.removeItem('loggedInUser');
+        localStorage.removeItem('loginState');
+        localStorage.removeItem('isLoggedIn');
+        sessionStorage.removeItem('currentUser');
+        console.log('登入狀態已清除');
+    }
+};
 
 // ========================================
 // 登入功能
@@ -197,25 +275,20 @@ function logout() {
 function initializeMemberPage() {
     console.log('正在初始化會員頁面...');
     
+    // 檢查登入狀態 - 使用新的管理器
     if (!AuthManager.isLoggedIn()) {
         console.log('用戶未登入，重導向到登入頁面');
-        if (!window.loginRedirected) {
-            window.loginRedirected = true;
-            alert('請先登入才能進入會員中心');
-            window.location.href = 'login.html';
-        }
+        alert('請先登入才能進入會員中心');
+        window.location.href = 'login.html';
         return;
     }
     
     const user = AuthManager.getLoginState();
     if (!user) {
         console.log('無法取得用戶資料');
-        if (!window.loginRedirected) {
-            window.loginRedirected = true;
-            alert('登入狀態異常，請重新登入');
-            AuthManager.clearLoginState();
-            window.location.href = 'login.html';
-        }
+        alert('登入狀態異常，請重新登入');
+        AuthManager.clearLoginState();
+        window.location.href = 'login.html';
         return;
     }
     
@@ -378,16 +451,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-let loginRedirected = false;
-
 // 頁面可見性變化時重新檢查登入狀態
 document.addEventListener('visibilitychange', function() {
     if (!document.hidden && 
         (window.location.pathname.includes('member.html') || 
          document.getElementById('profileForm'))) {
         
-        if (!AuthManager.isLoggedIn() && !loginRedirected) {
-            loginRedirected = true;
+        if (!AuthManager.isLoggedIn()) {
             alert('登入狀態已過期，請重新登入');
             window.location.href = 'login.html';
         }
@@ -409,18 +479,14 @@ function checkLoginStatus() {
 // ========================================
 // CART.HTML 相關功能
 // ========================================
-
-// ========================================
-// CART.HTML 相關功能
-// ========================================
 let cartItems = [];
 
 // 初始化購物車
 document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('cart');
   cartItems = saved ? JSON.parse(saved) : [
-    { id: 1, name: '海鹽焦糖乳酪減醣貝果', price: 50, quantity: 1, image: 'image/bagel10.jpg' },
-    { id: 2, name: '蜜香無花果乳酪減醣貝果', price: 60, quantity: 1, image: 'image/bagel09.jpg' }
+    { id: 1, name: '海鹽焦糖乳酪貝果', price: 50, quantity: 1, image: 'image/bagel10.jpg' },
+    { id: 2, name: '無花果乳酪貝果', price: 60, quantity: 1, image: 'image/bagel09.jpg' }
   ];
 
   renderCart();
@@ -442,7 +508,7 @@ function renderCart() {
     <div class="cart-item d-flex justify-content-between align-items-center mb-3">
       <div class="item-details d-flex align-items-center">
         <div class="item-img me-3">
-          <img src="${item.image.startsWith('image/') ? item.image : 'image/' + item.image}" alt="${item.name}" width="80" />
+         <img src="${item.image.startsWith('image/') ? item.image : 'image/' + item.image}" alt="${item.name}" width="80" />
         </div>
         <div class="item-info" data-price="${item.price}">${item.name} - $${item.price}</div>
       </div>
@@ -546,7 +612,6 @@ function initializeCartEvents() {
     else if (idx + 1 === currentStep) step.classList.add('active');
   });
 }
-
 // ========================================
 // FILLINFO.HTML 相關功能
 // ========================================
@@ -787,7 +852,6 @@ document.addEventListener('DOMContentLoaded', function() {
             break;
         case 'cart.html':
             initializeCartEvents();
-            initializeCartStepProgress();
             break;
         case 'fillinfo.html':
             initializeFillInfoPage();
@@ -843,104 +907,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
- // === 🔍 搜尋功能 ===
-document.getElementById("search-icon").addEventListener("click", function () {
-  const searchInput = document.getElementById("search-input");
-  if (searchInput.style.display === "none" || searchInput.style.display === "") {
-    searchInput.style.display = "block";
-    searchInput.focus();
-  } else {
-    searchInput.style.display = "none";
-  }
-});
-
-if (window.location.pathname.includes("index.html")) {
-  // === 📸 輪播功能（首頁大圖輪播）===
-  let slideIndex = 0;
-  let myTimer = null;
-
-  autoplay(true);
-
-  function plusSlides(n) {
-    showSlides(slideIndex += n);
-  }
-
-  function currentSlides(n) {
-    showSlides(slideIndex = n);
-  }
-
-  function showSlides(n) {
-    clearTimeout(myTimer);
-
-    const slides = document.getElementsByClassName("mySlides");
-    const dots = document.getElementsByClassName("dot");
-    const track = document.getElementById("carousel-track");
-
-    if (!track || slides.length === 0 || dots.length === 0) return; // 防止報錯
-
-    if (n >= slides.length) {
-      slideIndex = 0;
-    }
-    if (n < 0) {
-      slideIndex = slides.length - 1;
-    }
-
-    // 移動輪播軌道
-    track.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-    // 控制圓點
-    for (let i = 0; i < dots.length; i++) {
-      dots[i].classList.remove("active");
-    }
-    dots[slideIndex].classList.add("active");
-  }
-
-  function autoplay(isFirst) {
-    if (!isFirst) {
-      slideIndex++;
-    }
-    showSlides(slideIndex);
-    myTimer = setTimeout(() => autoplay(false), 2500);
-  }
-
-  // === 🛒 熱銷商品滑動功能 ===
-  let currentIndex = 0;
-  const slider = document.getElementById("productSlider");
-  const cards = document.querySelectorAll(".product-card");
-  const cardWidth = 320; // 含 margin 寬度
-
-  function updateSlider() {
-    if (!slider) return;
-    const offset = -currentIndex * cardWidth;
-    slider.style.transform = `translateX(${offset}px)`;
-  }
-
-  function prevProduct() {
-    if (currentIndex > 0) {
-      currentIndex--;
-      updateSlider();
-    }
-  }
-
-  function nextProduct() {
-    const maxIndex = cards.length - 3; // 顯示三張
-    if (currentIndex < maxIndex) {
-      currentIndex++;
-      updateSlider();
-    }
-  }
-}
-
-//聯絡我們
-if (window.location.pathname.includes("communication.html")) {
-  document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("contact-form").addEventListener("submit", function(event) {
-    event.preventDefault(); // 防止表單實際送出
-    alert("已成功送出，謝謝您的聯絡！");
-    this.reset();
-  });
-});
-}
 
 
 
