@@ -410,25 +410,31 @@ function checkLoginStatus() {
 // CART.HTML 相關功能
 // ========================================
 
+// ========================================
+// CART.HTML 相關功能
+// ========================================
 let cartItems = [];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("cart");
-  cartItems = saved ? JSON.parse(saved) : [];
+// 初始化購物車
+document.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('cart');
+  cartItems = saved ? JSON.parse(saved) : [
+    { id: 1, name: '海鹽焦糖乳酪貝果', price: 50, quantity: 1, image: 'img1.jpg' },
+    { id: 2, name: '無花果乳酪貝果', price: 60, quantity: 1, image: 'img2.jpg' }
+  ];
 
   renderCart();
-  initializeCartEvents();
+  bindQuantityInputs();
 });
 
+// 渲染購物車列表
 function renderCart() {
-  const container = document.getElementById("cart-product-list");
-
+  const container = document.getElementById('cart-product-list');
   if (!container) return;
 
   if (cartItems.length === 0) {
-    container.innerHTML = "<p>您的購物車是空的。</p>";
-    document.getElementById("item-count").textContent = "0";
-    document.querySelector(".total-price").textContent = "$0";
+    container.innerHTML = '<p>您的購物車是空的。</p>';
+    updateSummary(0, 0);
     return;
   }
 
@@ -436,88 +442,103 @@ function renderCart() {
     <div class="cart-item d-flex justify-content-between align-items-center mb-3">
       <div class="item-details d-flex align-items-center">
         <div class="item-img me-3">
-          <img src="${item.image}" alt="${item.name}" width="80">
+          <img src="${item.image || ''}" alt="${item.name}" width="80" />
         </div>
         <div class="item-info" data-price="${item.price}">${item.name} - $${item.price}</div>
       </div>
       <div class="item-qty">
-        <input type="number" value="${item.quantity}" min="0" data-item-id="${item.id}" class="form-control w-75">
+        <input type="number" min="0" value="${item.quantity}" data-item-id="${item.id}" class="form-control w-75" />
       </div>
       <div class="item-subtotal">$${item.price * item.quantity}</div>
     </div>
   `).join('');
 
-  updateCartDisplay();
+  updateSummary(
+    cartItems.reduce((sum, item) => sum + item.quantity, 0),
+    cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  );
+
+  bindQuantityInputs();
 }
 
-function updateQuantity(id, newQty) {
-  const item = cartItems.find(i => i.id === id);
-  if (item) {
-    item.quantity = Math.max(1, parseInt(newQty) || 1);
-    saveCartToStorage();
-    renderCart();
-    initializeCartEvents(); // 重新綁定 input 事件
-  }
-}
-
-function removeCartItem(id) {
-  cartItems = cartItems.filter(i => i.id !== id);
-  saveCartToStorage();
-  renderCart();
-  initializeCartEvents(); // 重新綁定
-}
-
-function updateCartDisplay() {
-  let totalItems = 0;
-  let totalPrice = 0;
-
-  cartItems.forEach(item => {
-    totalItems += item.quantity;
-    totalPrice += item.price * item.quantity;
-  });
-
-  document.getElementById("item-count").textContent = totalItems;
-  document.querySelector(".total-price").textContent = `$${totalPrice}`;
-}
-
-function saveCartToStorage() {
-  localStorage.setItem("cart", JSON.stringify(cartItems));
-}
-
-function initializeCartEvents() {
-  document.querySelectorAll('input[data-item-id]').forEach(input => {
-    input.addEventListener('change', (e) => {
+// 綁定數量 input 事件
+function bindQuantityInputs() {
+  const inputs = document.querySelectorAll('input[data-item-id]');
+  inputs.forEach(input => {
+    input.onchange = (e) => {
       const id = +e.target.dataset.itemId;
-      const val = parseInt(e.target.value);
+      let val = parseInt(e.target.value);
 
       if (isNaN(val) || val < 0) {
-        e.target.value = 1;
+        alert('數量必須是大於或等於 0 的整數');
+        e.target.value = getQuantityById(id);
         return;
       }
 
       if (val === 0) {
-        const confirmDelete = confirm("數量為 0，是否要從購物車中刪除此商品？");
-        if (confirmDelete) {
+        if (confirm('數量為 0，是否要從購物車中刪除此商品？')) {
           removeCartItem(id);
         } else {
-          e.target.value = 1;
-          updateQuantity(id, 1);
+          e.target.value = getQuantityById(id);
         }
-      } else {
+        return;
+      }
+
+      updateQuantity(id, val);
+    };
+
+    // 可選：即時更新（輸入時更新）
+    input.oninput = (e) => {
+      const id = +e.target.dataset.itemId;
+      let val = parseInt(e.target.value);
+      if (!isNaN(val) && val > 0) {
         updateQuantity(id, val);
       }
-    });
-
-    input.addEventListener('input', (e) => {
-      const val = parseInt(e.target.value);
-      if (!isNaN(val) && val > 0) {
-        updateQuantity(+e.target.dataset.itemId, val);
-      }
-    });
+    };
   });
 }
 
-function initializeCartStepProgress() {
+// 依 id 取得商品目前數量
+function getQuantityById(id) {
+  const item = cartItems.find(i => i.id === id);
+  return item ? item.quantity : 1;
+}
+
+// 更新商品數量
+function updateQuantity(id, newQty) {
+  const item = cartItems.find(i => i.id === id);
+  if (!item) return;
+
+  item.quantity = newQty;
+
+  // 重新渲染購物車
+  renderCart();
+  saveCartToStorage();
+}
+
+// 從購物車移除商品
+function removeCartItem(id) {
+  cartItems = cartItems.filter(i => i.id !== id);
+  renderCart();
+  saveCartToStorage();
+}
+
+// 更新總數和總價顯示
+function updateSummary(totalQty, totalPrice) {
+  const countEl = document.getElementById('item-count');
+  const priceEl = document.querySelector('.total-price');
+
+  if (countEl) countEl.textContent = totalQty;
+  if (priceEl) priceEl.textContent = `$${totalPrice}`;
+}
+
+// 存到 localStorage
+function saveCartToStorage() {
+  localStorage.setItem('cart', JSON.stringify(cartItems));
+}
+
+
+function initializeCartEvents() {
   // 步驟條高亮設定
   const currentStep = 1;
   document.querySelectorAll('.step').forEach((step, idx) => {
@@ -525,6 +546,7 @@ function initializeCartStepProgress() {
     else if (idx + 1 === currentStep) step.classList.add('active');
   });
 }
+
 // ========================================
 // FILLINFO.HTML 相關功能
 // ========================================
