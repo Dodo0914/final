@@ -419,8 +419,8 @@ let cartItems = [];
 document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('cart');
   cartItems = saved ? JSON.parse(saved) : [
-    { id: 1, name: '海鹽焦糖乳酪貝果', price: 50, quantity: 1, image: 'img1.jpg' },
-    { id: 2, name: '無花果乳酪貝果', price: 60, quantity: 1, image: 'img2.jpg' }
+    { id: 1, name: '海鹽焦糖乳酪減醣貝果', price: 50, quantity: 1, image: 'image/bagel10.jpg' },
+    { id: 2, name: '蜜香無花果乳酪減醣貝果', price: 60, quantity: 1, image: 'image/bagel09.jpg' }
   ];
 
   renderCart();
