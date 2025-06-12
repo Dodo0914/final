@@ -2,13 +2,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabButtons = document.querySelectorAll(".tab-btn");
   const tabContents = document.querySelectorAll(".tab-content");
 
+   //綁定每頁按鈕點擊事件
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-tab");
 
+      // 移除所有按鈕與內容的 active 狀態
       tabButtons.forEach(b => b.classList.remove("active"));
       tabContents.forEach(c => c.classList.remove("active"));
 
+      //對當前點擊的按鈕與對應內容加上 active
       btn.classList.add("active");
       document.getElementById(target).classList.add("active");
     });
@@ -25,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
     quantityInput.value = parseInt(quantityInput.value) + 1;
   });
 
+  // ========================================
+  // 數量減少按鈕功能
+  // ========================================
   decreaseBtn.addEventListener('click', () => {
     const current = parseInt(quantityInput.value);
     if (current > 1) {
@@ -32,6 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // ========================================
+  // 推薦商品滑動按鈕功能
+  // ========================================
   document.querySelector('.scroll-btn.left').addEventListener('click', () => {
   document.getElementById('recommend-scroll').scrollBy({ left: -300, behavior: 'smooth' });
   });
@@ -40,6 +49,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('recommend-scroll').scrollBy({ left: 300, behavior: 'smooth' });
   });
 
+  // ========================================
+  // 點擊縮圖切換主圖
+  // ========================================
   const mainImageScroll = document.getElementById("mainImageScroll");
   const mainSlides = document.querySelectorAll(".main-slide");
   const thumbnails = document.querySelectorAll(".thumbnail");
@@ -47,12 +59,19 @@ document.addEventListener("DOMContentLoaded", () => {
   thumbnails.forEach((thumbnail, index) => {
   thumbnail.addEventListener("click", () => {
     
-
+    //移除所有縮圖的active狀態
     thumbnails.forEach(t => t.classList.remove("active"));
+    //設定當前點擊的縮圖為active
     thumbnail.classList.add("active");
     });
   });
 
+
+  // ========================================
+  // 商品詳情頁：加入購物車與立即購買功能
+  // ========================================
+  
+  // 取得 DOM 元素
   const addToCartBtn = document.querySelector(".product-actions .btn-orange:nth-child(1)");
   const buyNowBtn = document.querySelector(".product-actions .btn-orange:nth-child(2)");
   const productTitle = document.querySelector(".product-title");
@@ -84,7 +103,9 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("已加入購物車！");
     });
 
-    // 直接購買
+  // ========================================
+    // 立即購買（跳轉填資料頁）
+    // ========================================
     buyNowBtn.addEventListener("click", () => {
       const price = parseInt(priceText.textContent.replace(/\D/g, ""));
       const quantity = parseInt(quantityInput.value);
@@ -97,10 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
         image: mainImage.src
       }];
 
-      // 存入 sessionStorage 作為單次結帳
+      //存入 sessionStorage 作為單次結帳
       sessionStorage.setItem("cartData", JSON.stringify(cartItem));
 
-      // 跳轉到填寫資料頁面
+      //前往結帳資料填寫頁面
       window.location.href = "fillinfo.html";
     });
   }
@@ -842,8 +863,14 @@ document.addEventListener("DOMContentLoaded", () => {
   },
   ];
 
+  // ========================================
+  // 動態推薦商品區功能（滑動列）
+  // ========================================
   const recommendScroll = document.getElementById('recommend-scroll');
 
+  // ========================================
+  // 隨機打亂推薦商品順序
+  // ========================================
   function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -853,7 +880,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   shuffleArray(recommendProducts); // ⭐ 將推薦產品順序隨機化
     
-  // 建立 IntersectionObserver
+  // ========================================
+  // 建立 IntersectionObserver 動畫監控
+  // ========================================
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -864,7 +893,9 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.1
   });
 
-  // 只取前 10 個推薦產品
+  // ========================================
+  // 產生前 10 個推薦商品 DOM 元素
+  // ========================================
   recommendProducts.slice(0, 10).forEach(product => {
     const a = document.createElement('a');
     a.className = 'recommend-item';
@@ -878,10 +909,17 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(a);
   });
 
+  // ========================================
+  // 從 URL 取得產品 ID
+  // ========================================
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
 
+  // ========================================
+  //  載入商品資料到頁面
+  // ========================================
   function loadProduct(product) {
+  // 🏷️ 更新商品標題與價格、描述
   document.querySelector(".product-title").textContent = product.name;
   document.querySelector(".price").textContent = `價格：$${product.price} / 份`;
   document.querySelector(".product-description").textContent = product.fullDescription || product.description || "尚無產品描述";
@@ -906,7 +944,7 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     reviewsSection.innerHTML = "<p>尚無評論</p>";
   }
-  // 計算統計
+  // 星星計算統計
   const starStats = [0, 0, 0, 0, 0];
   let totalRating = 0;
 
@@ -935,12 +973,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(`.percent-${i}`).textContent = `${percent}%`;
   }
 
-
+  // ========================================
+  // 商品介紹內容與圖片區塊產生器
+  // ========================================
   const introContent = document.getElementById("intro");
   introContent.innerHTML = ""; // 清空原本內容
   let hasIntro = false;
 
-  // ➕ 加入介紹圖片
+  //加入介紹圖片
   if (product.introImage) {
     const introImg = document.createElement("img");
     introImg.src = product.introImage;
@@ -953,7 +993,7 @@ document.addEventListener("DOMContentLoaded", () => {
     introContent.appendChild(introImg);
     hasIntro = true;
   }
-
+  //加入保存方式圖片
   if (product.storageImage) {
     const storageImg = document.createElement("img");
     storageImg.src = product.storageImage;
@@ -968,19 +1008,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  // 🧪 沒有內容才顯示 fallback
+  //沒有介紹或保存圖才顯示預設訊息
   if (!hasIntro) {
     introContent.innerHTML = `<p>📦 目前尚無產品介紹內容。</p>`;
   }
   
+  // ========================================
+  // 商品主圖與縮圖輪播區塊初始化
+  // ========================================
   const mainImageBox = document.getElementById("mainImageScroll");
-  mainImageBox.innerHTML = ""; // 清空
+  mainImageBox.innerHTML = ""; // 清空主圖容器
   const mainImage = document.createElement("img");
   mainImage.className = "main-slide";
   mainImageBox.appendChild(mainImage); // 放進主圖容器
 
   const thumbnailList = document.querySelector(".thumbnail-list");
-  thumbnailList.innerHTML = "";
+  thumbnailList.innerHTML = "";// 清空縮圖列
 
   (product.images || [product.image]).forEach((src, i) => {
     const thumb = document.createElement("img");
@@ -988,11 +1031,12 @@ document.addEventListener("DOMContentLoaded", () => {
     thumb.alt = `縮圖${i + 1}`;
     thumb.className = "thumbnail" + (i === 0 ? " active" : "");
 
-    // 第 0 張預設主圖
+    // 第 0 張為預設主圖
     if (i === 0) {
       mainImage.src = src;
     }
 
+    //點擊縮圖切換主圖
     thumb.addEventListener("click", () => {
       mainImage.src = src;
 
@@ -1003,7 +1047,7 @@ document.addEventListener("DOMContentLoaded", () => {
     thumbnailList.appendChild(thumb);
   });
 
-  //加入最愛功能（建議放在 loadProduct 裡）
+  //加入最愛功能
   const favBtn = document.querySelector(".favorite-btn");
   const productId = new URLSearchParams(window.location.search).get("id");
 
@@ -1015,6 +1059,7 @@ document.addEventListener("DOMContentLoaded", () => {
       favBtn.classList.add("active");
     }
 
+    // 點擊切換最愛狀態
     favBtn.addEventListener("click", () => {
       let updatedFavorites = JSON.parse(localStorage.getItem("favorites") || "[]").map(String);
 
@@ -1032,8 +1077,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-
-
+  // ========================================
+  // 營養標示表格動態生成
+  // ========================================
   const nutritionTableBody = document.querySelector(".nutrition-table tbody");
     if (nutritionTableBody) {
       nutritionTableBody.innerHTML = "";
@@ -1049,6 +1095,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // ========================================
+  // 根據 URL 載入對應商品資料
+  // ========================================
   if (productId) {
   const product = recommendProducts.find(p => p.id == productId);
     if (product) {
