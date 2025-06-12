@@ -312,6 +312,9 @@
     },
   ];
 
+  // ==============================
+  // 將商品加入購物車
+  // ==============================
   function addToCart(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -329,6 +332,9 @@
     alert(`已加入購物車：${product.name}`);
   }
 
+  // ==============================
+  // 渲染分類頁面產品卡片
+  // ==============================
   function renderCategory(categoryName) {
     const container = document.getElementById("product-list");
     const filtered = categoryName === "全部"
@@ -348,6 +354,7 @@
       </div>
     `).join('');
 
+    // 綁定每張卡片的加入購物車按鈕事件
     document.querySelectorAll(".add-to-cart-btn").forEach(btn => {
       btn.addEventListener("click", (e) => {
         const id = parseInt(e.target.getAttribute("data-id"));
@@ -356,6 +363,9 @@
     });
   }
 
+  // ==============================
+  // 點擊分類按鈕後切換類別
+  // ==============================
   function renderCategoryUI(button) {
     const categoryName = button.getAttribute("data-category");
 
@@ -367,6 +377,9 @@
     renderCategory(categoryName);
   }
 
+  // ==============================
+  // 載入時解析網址分類參數 & 自動點擊對應按鈕
+  // ==============================
   document.addEventListener("DOMContentLoaded", () => {
     const urlParams = new URLSearchParams(window.location.search);
     const rawCategory = urlParams.get("category");
@@ -381,16 +394,18 @@
     }
   });
 
-    // === 🔍 搜尋功能 ===
-document.getElementById("search-icon").addEventListener("click", function () {
-  const searchInput = document.getElementById("search-input");
-  if (searchInput.style.display === "none" || searchInput.style.display === "") {
-    searchInput.style.display = "block";
-    searchInput.focus();
-  } else {
-    searchInput.style.display = "none";
-  }
-});
+  // ==============================
+  //  搜尋圖示點擊顯示/隱藏搜尋欄
+  // =============================
+  document.getElementById("search-icon").addEventListener("click", function () {
+    const searchInput = document.getElementById("search-input");
+    if (searchInput.style.display === "none" || searchInput.style.display === "") {
+      searchInput.style.display = "block";
+      searchInput.focus();
+    } else {
+      searchInput.style.display = "none";
+    }
+  });
 </script>
 
 </body>

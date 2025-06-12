@@ -615,7 +615,10 @@ h1 {
         category: "禮盒"
       },
     ];
-    
+
+    // ==============================
+    // 渲染收藏清單
+    // ==============================
     function renderFavorites() {
     const favIds = JSON.parse(localStorage.getItem("favorites") || "[]").map(String);
     const container = document.getElementById("favorites-container");
@@ -649,20 +652,29 @@ h1 {
     });
     }
 
+    // ==============================
+    // 移除單一收藏項目
+    // ==============================
     function removeFavorite(id) {
       let fav = JSON.parse(localStorage.getItem("favorites") || "[]");
       fav = fav.filter(x => Number(x) !== id);
       localStorage.setItem("favorites", JSON.stringify(fav));
-      renderFavorites();
+      renderFavorites();// 重新渲染更新畫面
     }
 
+    // ==============================
+    // 清除所有收藏項目
+    // ==============================
     function clearFavorites() {
       if (confirm("確定要清空所有收藏嗎？")) {
         localStorage.removeItem("favorites");
-        renderFavorites();
+        renderFavorites();// 重新渲染為空畫面
       }
     }
 
+  // ==============================
+  // 頁面加載時初始化收藏清單
+  // ==============================
     document.addEventListener('DOMContentLoaded', renderFavorites);
   </script>
 </body>
