@@ -19,7 +19,7 @@ function togglePassword(toggleEl, inputId) {
 }
 
 // 存儲用戶數據的簡單陣列
-let users = [];
+let users = JSON.parse(localStorage.getItem('users')) || [];
 
 // 表單切換功能
 function showLogin() {
@@ -76,6 +76,7 @@ function initializeLoginEvents() {
             const email = document.getElementById('loginEmail').value;
             const password = document.getElementById('loginPassword').value;
             
+            const users = JSON.parse(localStorage.getItem('users')) || [];
             const user = users.find(u => u.email === email && u.password === password);
             
             if (user) {
@@ -118,17 +119,20 @@ if (registerForm) {
             phone: phone,
             password: password
         });
+        localStorage.setItem('users', JSON.stringify(users));
 
         showMessage('註冊成功！請登入您的帳號');
 
         setTimeout(() => {
             document.getElementById('registerFormElement').reset();
+            clearMessages();
             showLogin();
 
             // ⭐ 自動填入登入表單
             document.getElementById('loginEmail').value = email;
             document.getElementById('loginPassword').value = password;
         }, 1500);
+         setTimeout(clearMessages, 100); // 讓 DOM 更新後再清一次
     });
 }
 
@@ -800,6 +804,7 @@ document.addEventListener('DOMContentLoaded', function() {
             break;
         default:
             console.log('頁面已載入:', currentPage);
+            break;
     }
 });
 
@@ -809,7 +814,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ========================================
 
 // 頁面載入完畢後的初始化
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
     // 根據當前頁面初始化對應功能
     const currentPage = window.location.pathname.split('/').pop() || 'index.html';
     
@@ -841,7 +846,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('頁面已載入:', currentPage);
             break;
     }
-});
+});*/
 
  // === 🔍 搜尋功能 ===
 document.getElementById("search-icon").addEventListener("click", function () {
