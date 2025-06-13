@@ -791,7 +791,7 @@ document.addEventListener('DOMContentLoaded', function() {
             break;
         case 'cart.html':
             initializeCartEvents();
-            initializeCartStepProgress();
+            //initializeCartStepProgress();
             break;
         case 'fillinfo.html':
             initializeFillInfoPage();
