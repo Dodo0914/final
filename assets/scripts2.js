@@ -686,6 +686,13 @@ function initializeFillInfoPage() {
 // PAYMENT.HTML 相關功能
 // ========================================
 function initializePaymentPage() {
+
+  // ✅ 自動填入收件人姓名
+    const savedFullname = sessionStorage.getItem('fullname');
+    const cardNameInput = document.getElementById('cardName');
+    if (savedFullname && cardNameInput) {
+      cardNameInput.value = savedFullname;
+    }
     // 步驟條高亮設定
     const currentStep = 3;
     document.querySelectorAll('.step').forEach((step, idx) => {
@@ -693,66 +700,42 @@ function initializePaymentPage() {
         else if (idx + 1 === currentStep) step.classList.add('active');
     });
 
-    // 顯示訂單摘要
-    const orderSummaryDiv = document.getElementById('order-summary');
-    if (orderSummaryDiv) {
-        const savedCart = localStorage.getItem('cart');
-        const cartItems = savedCart ? JSON.parse(savedCart) : [];
-        const shippingFee = 225;
-        let subtotal = 0;
-
-        orderSummaryDiv.innerHTML = '';
-
-        if (cartItems.length === 0) {
-            orderSummaryDiv.innerHTML = "<p>購物車是空的。</p>";
-        } else {
-            cartItems.forEach(item => {
-                const itemRow = document.createElement('div');
-                itemRow.className = 'd-flex justify-content-between mb-2';
-                itemRow.innerHTML = `
-                    <span>${item.name} × ${item.quantity}</span>
-                    <span>$${item.price * item.quantity}</span>
-                `;
-                orderSummaryDiv.appendChild(itemRow);
-                subtotal += item.price * item.quantity;
-            });
-
-            // 小計、運費與總計
-            orderSummaryDiv.innerHTML += `
-                <div class="d-flex justify-content-between"><strong>小計</strong><strong>$${subtotal}</strong></div>
-                <div class="d-flex justify-content-between"><strong>運費</strong><strong>$${shippingFee}</strong></div>
-                <div class="summary-total d-flex justify-content-between"><strong>總計</strong><strong>$${subtotal + shippingFee}</strong></div>
-            `;
-        }
-    }
-
-    // 顯示收件人資訊
-    const userInfoDiv = document.getElementById('user-info-summary');
-    if (userInfoDiv) {
-        const fields = ['fullname', 'phone', 'email', 'address', 'payment-method'];
-        userInfoDiv.innerHTML = fields.map(name => {
-            const value = sessionStorage.getItem(name) || '（未填）';
-            const label = getFieldLabel(name);
-            return `<p><strong>${label}：</strong> ${value}</p>`;
-        }).join('');
-    }
-
     // 付款表單送出處理
     const paymentForm = document.getElementById('payment-form');
     if (paymentForm) {
-        paymentForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // 防止表單提交刷新頁面
+      paymentForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // 防止原生提交
 
-            alert('付款完成！感謝您的訂購！');
+        
+        // 欲驗證的欄位名稱
+        const requiredFields = ['cardName', 'cardNumber', 'expDate', 'cvv'];
+        let valid = true;
 
-            // 清除所有購物車與表單資料
-            localStorage.removeItem('cart');
-            sessionStorage.clear();
+        
 
-            // 跳轉到感謝頁
-            location.href = 'thank-you.html';
+        requiredFields.forEach(name => {
+          const input = paymentForm.elements[name];
+          if (!input.value.trim()) {
+            input.classList.add('is-invalid');
+            valid = false;
+          } else {
+            input.classList.remove('is-invalid');
+          }
         });
+
+        if (!valid) {
+          alert('請完整填寫所有付款欄位');
+          return;
+        }
+
+        // ✅ 通過驗證後
+        alert('付款完成！感謝您的訂購！');
+        localStorage.removeItem('cart');
+        sessionStorage.clear();
+        location.href = 'thank-you.html';
+      });
     }
+
 }
 
 // 對應欄位標籤顯示
